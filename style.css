@@ -40,7 +40,7 @@
 
 .navbar ul {
     display: flex;
-    margin-right: 2px;
+    margin-right: 7px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
@@ -66,7 +66,7 @@
     width: 135px;
     font-family: 'Courier New', Courier, monospace;
     background-color: #eee;
-    margin-left: 10px; /* Menambahkan jarak di sebelah kiri agar seimbang */
+    margin-left: 15px; /* Menambahkan jarak di sebelah kiri agar seimbang */
     display: flex;     /* Menggunakan flex agar gambar di dalamnya mudah diatur */
     justify-content: center;
     align-items: center;
@@ -77,7 +77,24 @@
     max-height: 85%;  /* Menggunakan persentase agar gambar tidak mentok ke tepi */
     max-width: 85%;   /* Mencegah gambar pecah/melewati batas kotak pembungkus */
     object-fit: contain; /* Menjaga rasio asli gambar agar tidak penyet/distorsi */
-    margin-right: 6px;
+    margin-right: 5px;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  margin-right: 15px;
+  background: none;
+  border: none;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 4px 0;
+  transition: 0.3s;
 }
 
 .profile {
@@ -93,4 +110,42 @@
 
 .desc {
     text-align: center;
+}
+
+@media screen and (max-width: 720px) {
+  /* Munculkan tombol hamburger */
+  .hamburger {
+    display: flex;
+  }
+
+  /* Ubah menu link menjadi vertikal dan sembunyikan secara default */
+  .navbar ul {
+    display: none; 
+    flex-direction: column;
+    width: 100%;
+    background-color: #023; /* Disamakan dengan warna navbar agar rapi */
+    position: absolute;
+    top: 100%; /* Muncul tepat di bawah navbar */
+    left: 0;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 20px 0;
+    text-align: center;
+    z-index: 999; /* KUNCI: Agar menu tampil di depan/di atas konten profil */
+  }
+
+  .navbar ul li {
+    margin: 15px 0;
+  }
+
+  /* KETIKA AKTIF: Munculkan menu ul */
+  .navbar.active ul {
+    display: flex;
+  }
+
+  /* KETIKA AKTIF: Ubah border-radius navbar menjadi 0 */
+  .navbar.active {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0; /* Disarankan diubah 0 juga agar simetris flat di bawah */
+  }
 }

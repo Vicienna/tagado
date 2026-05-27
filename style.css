@@ -32,8 +32,10 @@ body {
 .navbar {
     display: flex;
     position: sticky;
+    z-index: 10;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
+    border-bottom: 2px solid rgba(238, 221, 238, 0.8);
     top: 0;
     justify-content: space-between;
     align-items: center;
@@ -42,15 +44,20 @@ body {
     background-color: #023;
 }
 
+.nav-logo {
+  text-decoration: none;
+  color: #112;
+}
+
 .navbar ul {
     display: flex;
-    margin-right: 7px;
+    margin-right: 15px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .navbar li {
     color: #ede;
-    margin-right: 8px;
+    margin-right: 15px;
     text-decoration: none;
     list-style-type: none;
 }
@@ -70,8 +77,7 @@ body {
     width: 135px;
     font-family: 'Courier New', Courier, monospace;
     background-color: #eee;
-    margin-left: 15px; /* Menambahkan jarak di sebelah kiri agar seimbang */
-    display: flex;     /* Menggunakan flex agar gambar di dalamnya mudah diatur */
+    margin-left: 30px; /* Menambahkan jarak di sebelah kiri agar seimbang */
     justify-content: center;
     align-items: center;
     border-radius: 3px; /* Opsional: membuat sudut background logo sedikit melingkar */
@@ -88,7 +94,7 @@ body {
   display: none;
   flex-direction: column;
   cursor: pointer;
-  margin-right: 15px;
+  margin-right: 30px;
   background: none;
   border: none;
 }
@@ -102,14 +108,12 @@ body {
 }
 
 @media screen and (max-width: 720px) {
-  /* Munculkan tombol hamburger */
   .hamburger {
     display: flex;
   }
 
-  /* --- ANIMASI MENU DROPDOWN --- */
   .navbar ul {
-    display: flex; /* Selalu flex agar animasi transisi bisa berjalan */
+    display: flex;
     flex-direction: column;
     width: 100%;
     background-color: #023;
@@ -118,14 +122,10 @@ body {
     left: 0;
     text-align: center;
     z-index: 999;
-
-    /* State awal saat tertutup (Sembunyi) */
     max-height: 0;
     opacity: 0;
     overflow: hidden;
-    padding: 0; /* Padding wajib 0 saat tertutup agar tidak menjebol max-height */
-    
-    /* Efek transisi halus (durasi 0.4 detik) */
+    padding: 0;
     transition: max-height 0.4s ease-in-out, opacity 0.3s ease, padding 0.4s ease;
   }
 
@@ -133,38 +133,44 @@ body {
     margin: 15px 0;
   }
 
-  /* KETIKA AKTIF: Menu membuka ke bawah & memudar muncul */
   .navbar.active ul {
-    max-height: 300px; /* Atur tinggi maksimal yang cukup untuk menampung link */
+    max-height: 300px;
     opacity: 1;
-    padding: 20px 0; /* Kembalikan padding saat menu terbuka */
+    padding: 20px 0;
   }
 
-  /* KETIKA AKTIF: Mengubah border-radius navbar jadi 0 */
   .navbar.active {
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
   }
 
-
-  /* --- BONUS: ANIMASI TOMBOL HAMBURGER JADI "X" --- */
-  /* Garis atas berputar 45 derajat dan turun ke tengah */
   .navbar.active .hamburger span:nth-child(1) {
     transform: translateY(11px) rotate(45deg);
   }
   
-  /* Garis tengah menghilang dan geser ke kiri */
   .navbar.active .hamburger span:nth-child(2) {
     opacity: 0;
     transform: translateX(-10px);
   }
   
-  /* Garis bawah berputar -45 derajat dan naik ke tengah */
   .navbar.active .hamburger span:nth-child(3) {
     transform: translateY(-11px) rotate(-45deg);
   }
+
+  /* Tambahan: Responsivitas Font di HP */
+  .profile-title {
+    font-size: 28px;
+  }
+  .profile-desc {
+    font-size: 16px;
+  }
+  .profile-card {
+    max-width: 85%; /* Lebih lebar di HP agar tidak terlalu sempit */
+    padding: 20px;
+  }
 }
 
+/* Profile Card (Pindahkan ke luar Media Query jika ini untuk tampilan desktop) */
 .profile-card {
     display: flex;
     flex-direction: column;
@@ -172,9 +178,18 @@ body {
     background-color: #ede;
     max-width: 70%;
     height: auto;
-    padding: 40px;
+    padding: 0 40px;
+    padding-top: 40px;
+    padding-bottom: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 15px;
-    margin-top: 40px;
+    margin: 40px 0;
+}
+
+.profile-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 40px 50px rgba(0, 0, 0, 0.2);
+
 }
 
 .profile-card img {
@@ -195,4 +210,15 @@ body {
     font-size: 24.7px;
     margin: 0px 10px;
     color: #333;
+}
+
+.profile-footer {
+  margin-top: 20px;
+  font-size: 15.2px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #023;
+}
+
+.profile-footer strong {
+  color: rgb(37, 177, 100);
 }

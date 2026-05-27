@@ -3,10 +3,14 @@
     margin: 0;
 }
 
+body {
+    background-color: #fef;
+}
+
 .container {
     display: flex;
     width: 100%;
-    height: auto;
+    min-height: 10px;
     justify-content: center;
 }
 
@@ -22,7 +26,7 @@
     justify-content: center;
     background-color: #ff6d18;
     color: #112;
-    margin-bottom: .5px;
+    margin-bottom: 0px;
 }
 
 .navbar {
@@ -97,55 +101,98 @@
   transition: 0.3s;
 }
 
-.profile {
-    display: block;
-    height: 200vh;
-    width: 80%;
-    margin-top: 10px;
-}
-
-.title {
-    text-align: center;
-}
-
-.desc {
-    text-align: center;
-}
-
 @media screen and (max-width: 720px) {
   /* Munculkan tombol hamburger */
   .hamburger {
     display: flex;
   }
 
-  /* Ubah menu link menjadi vertikal dan sembunyikan secara default */
+  /* --- ANIMASI MENU DROPDOWN --- */
   .navbar ul {
-    display: none; 
+    display: flex; /* Selalu flex agar animasi transisi bisa berjalan */
     flex-direction: column;
     width: 100%;
-    background-color: #023; /* Disamakan dengan warna navbar agar rapi */
+    background-color: #023;
     position: absolute;
-    top: 100%; /* Muncul tepat di bawah navbar */
+    top: 100%; 
     left: 0;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-    padding: 20px 0;
     text-align: center;
-    z-index: 999; /* KUNCI: Agar menu tampil di depan/di atas konten profil */
+    z-index: 999;
+
+    /* State awal saat tertutup (Sembunyi) */
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    padding: 0; /* Padding wajib 0 saat tertutup agar tidak menjebol max-height */
+    
+    /* Efek transisi halus (durasi 0.4 detik) */
+    transition: max-height 0.4s ease-in-out, opacity 0.3s ease, padding 0.4s ease;
   }
 
   .navbar ul li {
     margin: 15px 0;
   }
 
-  /* KETIKA AKTIF: Munculkan menu ul */
+  /* KETIKA AKTIF: Menu membuka ke bawah & memudar muncul */
   .navbar.active ul {
-    display: flex;
+    max-height: 300px; /* Atur tinggi maksimal yang cukup untuk menampung link */
+    opacity: 1;
+    padding: 20px 0; /* Kembalikan padding saat menu terbuka */
   }
 
-  /* KETIKA AKTIF: Ubah border-radius navbar menjadi 0 */
+  /* KETIKA AKTIF: Mengubah border-radius navbar jadi 0 */
   .navbar.active {
     border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0; /* Disarankan diubah 0 juga agar simetris flat di bawah */
+    border-bottom-left-radius: 0;
   }
+
+
+  /* --- BONUS: ANIMASI TOMBOL HAMBURGER JADI "X" --- */
+  /* Garis atas berputar 45 derajat dan turun ke tengah */
+  .navbar.active .hamburger span:nth-child(1) {
+    transform: translateY(11px) rotate(45deg);
+  }
+  
+  /* Garis tengah menghilang dan geser ke kiri */
+  .navbar.active .hamburger span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  
+  /* Garis bawah berputar -45 derajat dan naik ke tengah */
+  .navbar.active .hamburger span:nth-child(3) {
+    transform: translateY(-11px) rotate(-45deg);
+  }
+}
+
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ede;
+    max-width: 70%;
+    height: auto;
+    padding: 40px;
+    border-radius: 15px;
+    margin-top: 40px;
+}
+
+.profile-card img {
+    width: 100px;
+    height: 100px;
+}
+
+.profile-title {
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 40px;
+    margin: 15px 10px;
+}
+
+.profile-desc {
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 24.7px;
+    margin: 0px 10px;
+    color: #333;
 }
